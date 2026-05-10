@@ -1,11 +1,22 @@
-"use client";
-
-import { useEffect, useState } from "react";
-
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbxt8bxJl-v95oZguBbtK-ERb3e17_xLxCLMPeZcyQKAcHeHzGdvrF_vY8uY4oDj3vuK/exec";
+  "https://opensheet.elk.sh/1SpBNvD2CdhvnaIep3Ssputr-0EsH2pwPnrZWl0p1Ktw/Sheet1";
 
 const FALLBACK_IMAGE = "https://placehold.co/600x600?text=Product";
+
+async function getProducts() {
+  try {
+    const res = await fetch(API_URL, {
+      next: { revalidate: 300 },
+    });
+
+    if (!res.ok) return [];
+
+    const data = await res.json();
+    return Array.isArray(data) ? data : [];
+  } catch {
+    return [];
+  }
+}
 
 function pick(item, keys) {
   for (const key of keys) {
@@ -14,41 +25,8 @@ function pick(item, keys) {
   return "";
 }
 
-function randomSold(index) {
-  const data = ["12k sold", "8.7k sold", "15k sold", "9.3k sold", "11k sold"];
-  return data[index % data.length];
-}
-
-function randomRating(index) {
-  const data = ["4.9", "4.8", "4.9", "4.8", "4.9"];
-  return data[index % data.length];
-}
-
-function randomSave(index) {
-  const data = ["33%", "41%", "35%", "34%", "38%"];
-  return data[index % data.length];
-}
-
-export default function Home() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [hasError, setHasError] = useState(false);
-
-  useEffect(() => {
-    async function loadProducts() {
-      try {
-        const res = await fetch(API_URL);
-        const data = await res.json();
-        setProducts(Array.isArray(data) ? data : []);
-      } catch {
-        setHasError(true);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    loadProducts();
-  }, []);
+export default async function Home() {
+  const products = await getProducts();
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-orange-50 to-slate-100 text-neutral-900">
@@ -79,7 +57,7 @@ export default function Home() {
 
         <section className="relative grid min-h-[520px] grid-cols-[1.1fr_0.9fr] items-center gap-8 overflow-hidden rounded-[36px] bg-gradient-to-br from-orange-100 to-orange-200 px-[60px] py-[70px] shadow-2xl max-lg:grid-cols-1 max-md:px-6 max-md:py-10">
           <div className="relative z-10">
-            <div className="mb-7 inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-extrabold text-[#ee4d2d] shadow-lg">
+            <div className="mb-7 inline-flex rounded-full bg-white px-5 py-3 text-sm font-extrabold text-[#ee4d2d] shadow-lg">
               🔥 Viral Shopee Finds
             </div>
 
@@ -94,7 +72,7 @@ export default function Home() {
 
             <a
               href="#products"
-              className="inline-flex items-center gap-3 rounded-[18px] bg-gradient-to-br from-orange-500 to-[#ee4d2d] px-8 py-5 text-[17px] font-black text-white shadow-xl"
+              className="inline-flex rounded-[18px] bg-gradient-to-br from-orange-500 to-[#ee4d2d] px-8 py-5 text-[17px] font-black text-white shadow-xl"
             >
               🛍️ SHOP BEST DEALS
             </a>
@@ -148,21 +126,9 @@ export default function Home() {
           id="products"
           className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-7 max-md:grid-cols-2 max-md:gap-3"
         >
-          {loading && (
+          {products.length === 0 && (
             <div className="col-span-full p-12 text-center font-bold text-neutral-500">
-              Loading products...
-            </div>
-          )}
-
-          {hasError && (
-            <div className="col-span-full p-12 text-center font-bold text-neutral-500">
-              Cannot load products. Please check API.
-            </div>
-          )}
-
-          {!loading && !hasError && products.length === 0 && (
-            <div className="col-span-full p-12 text-center font-bold text-neutral-500">
-              No products found.
+              No products found. Please check Google Sheet.
             </div>
           )}
 
@@ -171,8 +137,12 @@ export default function Home() {
             const price = pick(item, ["price", "giá"]);
             const oldPrice = pick(item, ["old_price", "giá cũ"]);
             const image = pick(item, ["image", "hình ảnh"]);
-            const link = pick(item, ["shopee_link", "liên kết Shopee"]);
             const badge = pick(item, ["badge", "huy hiệu"]) || "HOT";
+            const link = pick(item, [
+              "link",
+              "shopee_link",
+              "liên kết Shopee",
+            ]);
 
             return (
               <article
@@ -189,9 +159,6 @@ export default function Home() {
                     src={image || FALLBACK_IMAGE}
                     alt={title || "Product"}
                     loading="lazy"
-                    onError={(e) => {
-                      e.currentTarget.src = FALLBACK_IMAGE;
-                    }}
                   />
                 </div>
 
@@ -202,11 +169,11 @@ export default function Home() {
 
                   <div className="mt-3 flex items-center justify-between gap-2">
                     <div className="text-[13px] font-semibold text-neutral-500 max-md:text-[11px]">
-                      ⭐ {randomRating(index)} &nbsp;•&nbsp; {randomSold(index)}
+                      ⭐ 4.9 • {index + 8}.2k sold
                     </div>
 
                     <div className="rounded-lg bg-yellow-300 px-2 py-1 text-[11px] font-black text-neutral-900 max-md:text-[9px]">
-                      SAVE {randomSave(index)}
+                      SAVE 33%
                     </div>
                   </div>
 
@@ -226,7 +193,7 @@ export default function Home() {
                     href={link || "#"}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-5 flex w-full items-center justify-center gap-2 rounded-[18px] bg-gradient-to-br from-orange-500 to-[#ee4d2d] p-4 text-[15px] font-black text-white transition hover:scale-[1.03] max-md:rounded-[13px] max-md:p-3 max-md:text-xs"
+                    className="mt-5 flex w-full items-center justify-center rounded-[18px] bg-gradient-to-br from-orange-500 to-[#ee4d2d] p-4 text-[15px] font-black text-white transition hover:scale-[1.03] max-md:rounded-[13px] max-md:p-3 max-md:text-xs"
                   >
                     🛒 BUY NOW
                   </a>
@@ -237,7 +204,7 @@ export default function Home() {
         </section>
 
         <footer className="mt-10 text-center text-[13px] text-neutral-500">
-          © Budol Finds PH — Trending Shopee gadgets
+          © Budol Finds PH — Products loaded from Google Sheet
         </footer>
       </div>
     </main>
