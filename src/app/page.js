@@ -49,64 +49,76 @@ export default async function Home() {
       </header>
 
       <section className="mx-auto max-w-7xl px-3 py-4">
-        <div className="overflow-hidden rounded-[36px] bg-[#f5ede1] p-4 shadow-xl">
-          <div className="relative overflow-hidden rounded-[30px] bg-gradient-to-br from-[#30261f] via-[#5b4737] to-[#1f1b18] p-6 text-white">
-            <div className="absolute inset-0 bg-black/30" />
+  <div className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-[#1a120f] via-[#3d241c] to-[#0f0b0a] p-5 shadow-2xl">
 
-            <div className="absolute right-[-40px] top-[-40px] h-44 w-44 rounded-full bg-orange-500/70 blur-2xl" />
-            <div className="absolute bottom-[-60px] left-[-60px] h-52 w-52 rounded-full bg-pink-500/40 blur-3xl" />
+    <div className="absolute right-[-40px] top-[-40px] h-44 w-44 rounded-full bg-orange-500 opacity-30 blur-3xl"></div>
 
-            <div className="relative z-10">
-              <div className="inline-flex rounded-full bg-black/50 px-4 py-2 text-xs font-black">
-                🔥 #1 TRENDING
-              </div>
+    <div className="relative z-10 flex items-center justify-between gap-4">
 
-              <h2 className="mt-5 text-[46px] font-black leading-[0.9] tracking-tight md:text-7xl">
-                SMART FINDS
-              </h2>
+      <div className="max-w-[58%]">
 
-              <h3 className="text-[46px] font-black leading-[0.9] tracking-tight text-orange-400 md:text-7xl">
-                BETTER LIVING
-              </h3>
-
-              <p className="mt-5 max-w-md text-base font-semibold leading-relaxed text-white/90 md:text-xl">
-                Top picks for your home, lifestyle & everyday essentials.
-              </p>
-
-              <a
-                href="#products"
-                className="mt-6 inline-flex rounded-2xl bg-gradient-to-r from-pink-500 to-orange-500 px-8 py-4 text-base font-black text-white shadow-xl"
-              >
-                SHOP NOW ›
-              </a>
-            </div>
-
-            <div className="relative z-10 mt-10 flex items-end justify-center gap-4">
-              <div className="flex h-24 w-20 items-center justify-center rounded-3xl bg-white text-5xl shadow-xl">
-                ⌚
-              </div>
-
-              <div className="flex h-32 w-24 items-center justify-center rounded-3xl bg-white text-6xl shadow-xl">
-                🎧
-              </div>
-
-              <div className="flex h-40 w-28 items-center justify-center rounded-3xl bg-white text-6xl shadow-xl">
-                🍚
-              </div>
-
-              <div className="flex h-28 w-24 items-center justify-center rounded-3xl bg-white text-5xl shadow-xl">
-                📷
-              </div>
-            </div>
-
-            <div className="absolute right-3 top-3 z-20 flex h-28 w-28 flex-col items-center justify-center rounded-full bg-orange-500 text-center font-black text-white shadow-2xl">
-              <span className="text-xs">UP TO</span>
-              <span className="text-4xl leading-none">80%</span>
-              <span className="text-sm">OFF</span>
-            </div>
-          </div>
+        <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-black/50 px-4 py-2 text-xs font-black text-white">
+          🔥 TRENDING NOW
         </div>
-      </section>
+
+        <h1 className="text-4xl font-black leading-[0.9] text-white">
+          SMART
+          <span className="block text-orange-400">
+            FINDS
+          </span>
+        </h1>
+
+        <p className="mt-3 text-sm font-medium leading-relaxed text-white/80">
+          Viral products Filipinos are buying today.
+        </p>
+
+        <button className="mt-5 rounded-2xl bg-gradient-to-r from-pink-500 to-orange-500 px-6 py-3 text-sm font-black text-white shadow-xl">
+          SHOP NOW →
+        </button>
+
+      </div>
+
+      <div className="flex flex-1 items-end justify-end gap-3">
+
+        <div className="overflow-hidden rounded-[28px] bg-white p-2 shadow-xl">
+          <img
+            src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800&auto=format&fit=crop"
+            className="h-28 w-20 rounded-2xl object-cover"
+          />
+        </div>
+
+        <div className="overflow-hidden rounded-[28px] bg-white p-2 shadow-xl">
+          <img
+            src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=800&auto=format&fit=crop"
+            className="h-36 w-24 rounded-2xl object-cover"
+          />
+        </div>
+
+        <div className="overflow-hidden rounded-[28px] bg-white p-2 shadow-xl">
+          <img
+            src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800&auto=format&fit=crop"
+            className="h-32 w-22 rounded-2xl object-cover"
+          />
+        </div>
+
+      </div>
+    </div>
+
+    <div className="absolute bottom-5 right-5 rounded-full bg-orange-500 px-5 py-4 text-center shadow-2xl">
+      <div className="text-xs font-black text-white">
+        UP TO
+      </div>
+
+      <div className="text-3xl font-black leading-none text-white">
+        80%
+      </div>
+
+      <div className="text-sm font-black text-white">
+        OFF
+      </div>
+    </div>
+  </div>
+</section>
 
       <section className="mx-auto max-w-7xl px-3">
         <div className="grid grid-cols-4 gap-2 rounded-3xl bg-white p-4 shadow-lg">
