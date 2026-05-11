@@ -105,7 +105,7 @@ export default async function Home() {
                   {icon}
                 </div>
 
-                <div className="mt-3 text-sm font-black leading-tight">
+                <div className="mt-2 whitespace-nowrap text-[11px] font-bold">
                   {name}
                 </div>
               </div>
