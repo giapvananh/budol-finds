@@ -197,12 +197,14 @@ export default async function Home() {
                     {badge}
                   </div>
 
-                  <img
-                    src={image || FALLBACK_IMAGE}
-                    alt={title || "Product"}
-                    loading="lazy"
-                    className="h-full w-full object-cover"
-                  />
+                  <Image
+  src={image || FALLBACK_IMAGE}
+  alt={title || "Product"}
+  width={500}
+  height={500}
+  className="h-full w-full object-cover"
+  unoptimized
+/>
                 </div>
 
                 <div className="p-3">
