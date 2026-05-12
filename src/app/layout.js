@@ -9,7 +9,11 @@ const poppins = Poppins({
 export const metadata = {
   title: "Budol Finds PH | Viral Shopee Deals",
   description:
-    "Trending Shopee gadgets, smart home finds, and viral products in the Philippines.",
+    "Trending Shopee gadgets, smart home finds, and viral products",
+
+  verification: {
+    google: "klmQqCWfqLaBjVQLJl-soCMDlU5NkkDo2FqKoIfyLHc",
+  },
 };
 
 export default function RootLayout({ children }) {
