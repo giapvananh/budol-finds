@@ -239,7 +239,30 @@ export default async function Home() {
           })}
         </div>
       </section>
+<section className="mx-auto max-w-7xl px-4 py-10">
+  <div className="rounded-3xl bg-white p-6 shadow-lg">
+    <h2 className="text-2xl font-black">
+      Best Viral Shopee Finds in the Philippines
+    </h2>
 
+    <p className="mt-4 text-sm leading-7 text-neutral-600">
+      Budol Finds PH helps Filipinos discover trending Shopee gadgets,
+      smart home products, viral TikTok finds, affordable beauty items,
+      gaming accessories, kitchen tools, and everyday deals updated daily.
+    </p>
+
+    <p className="mt-4 text-sm leading-7 text-neutral-600">
+      Explore the latest affordable Shopee finds, wireless earbuds, smart home
+      essentials, desk setup accessories, beauty must-haves, and viral products
+      people are buying in the Philippines today.
+    </p>
+
+    <p className="mt-4 text-sm leading-7 text-neutral-600">
+      We curate popular products from Shopee so you can quickly find useful,
+      budget-friendly, and trending items without spending hours searching.
+    </p>
+  </div>
+</section>
       <footer className="mt-10 border-t border-neutral-200 bg-white py-8 text-center text-sm font-semibold text-neutral-500">
         © Budol Finds PH — Viral Shopee Finds
       </footer>
